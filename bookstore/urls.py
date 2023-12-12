@@ -20,6 +20,8 @@ from django.conf.urls.static import static
 from django.conf import settings
 from django.contrib.auth.views import LoginView
 
+from jet import urls as jet_urls
+
 
 app_name='bapp'
 
@@ -27,7 +29,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('bapp.urls')),
     path('account/',include('registration.backends.default.urls')),
-    
+    path('jet/', include(jet_urls, 'jet')),
+    path('jet/dashboard/', include('jet.dashboard.urls', 'jet-dashboard')),
     path('account/login/', LoginView.as_view(success_url='bapp:main'), name='login'),
     path('paypal/', include("paypal.standard.ipn.urls")),
 
